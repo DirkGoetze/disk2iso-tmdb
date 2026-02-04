@@ -74,7 +74,8 @@ api_key = dein_api_key_hier
 ```
 
 Oder via Web-UI:
-1. Öffne http://your-server:5000
+
+1. Öffne <http://your-server:5000>
 2. **Einstellungen → Metadata Provider → TMDB**
 3. Trage API Key ein → **Speichern**
 
@@ -113,6 +114,7 @@ api_key=
 ### Automatisch
 
 Der Provider wird automatisch vom Metadata-Framework verwendet, wenn:
+
 - Eine DVD oder Blu-ray eingelegt wird
 - libmetadata.sh aktiviert ist
 - TMDB als Video-Provider konfiguriert ist
@@ -127,7 +129,7 @@ sudo journalctl -u disk2iso -f | grep TMDB
 
 ### Via Web-UI
 
-1. Öffne http://your-server:5000
+1. Öffne <http://your-server:5000>
 2. Lege DVD/Blu-ray ein
 3. **Metadata-Dialog** öffnet sich automatisch
 4. Wähle Film/Serie aus TMDB-Suchergebnissen
@@ -157,7 +159,7 @@ curl "http://localhost:5000/api/metadata/query?provider=tmdb&title=Inception&yea
 
 ## 📊 Ausgabe-Struktur
 
-```
+```text
 /media/iso/metadata/tmdb/
 ├── cache/
 │   ├── inception_2010.nfo          # Cached Query-Results
@@ -206,7 +208,7 @@ metadata_register_provider "tmdb" "dvd-video,bd-video"
 
 ### Struktur
 
-```
+```text
 disk2iso-tmdb/
 ├── conf/
 │   └── libtmdb.ini             # Provider-Manifest
