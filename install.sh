@@ -76,6 +76,12 @@ echo -e "${YELLOW}Installing documentation...${NC}"
 cp -rv doc/04_Module "$INSTALL_DIR/doc/"
 chmod -R 644 "$INSTALL_DIR/doc/04_Module/04-4_Metadaten"/*.md
 
+# Copy web interface components (if exist)
+if [ -d "www" ]; then
+    echo -e "${YELLOW}Installing web interface components...${NC}"
+    cp -rv www/* "$INSTALL_DIR/services/disk2iso-web/"
+fi
+
 echo -e "${GREEN}✓ $MODULE_NAME installed successfully${NC}"
 echo ""
 echo "This is a metadata provider for The Movie Database (TMDB)."
