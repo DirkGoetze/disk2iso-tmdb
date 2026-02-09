@@ -23,8 +23,8 @@ async function checkTmdbStatus() {
             return;
         }
         
-        // Prüfe /api/metadata/pending für DVD/Blu-ray
-        const response = await fetch('/api/metadata/pending');
+        // TMDB-spezifischer Endpoint
+        const response = await fetch('/api/metadata/tmdb/pending');
         
         if (!response.ok) {
             return;
@@ -159,16 +159,15 @@ async function selectTmdbResult() {
         }
         
         // Hole disc_id aus pending-API
-        const pendingResponse = await fetch('/api/metadata/pending');
+        const pendingResponse = await fetch('/api/metadata/tmdb/pending');
         const pendingData = await pendingResponse.json();
         
-        const response = await fetch('/api/metadata/select', {
+        const response = await fetch('/api/metadata/tmdb/select', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 disc_id: pendingData.disc_id,
-                index: selectedTmdbIndex,
-                disc_type: pendingData.disc_type
+                index: selectedTmdbIndex
             })
         });
         
@@ -196,16 +195,15 @@ async function skipTmdbSelection() {
             clearInterval(tmdbCountdownInterval);
         }
         
-        const pendingResponse = await fetch('/api/metadata/pending');
+        const pendingResponse = await fetch('/api/metadata/tmdb/pending');
         const pendingData = await pendingResponse.json();
         
-        const response = await fetch('/api/metadata/select', {
+        const response = await fetch('/api/metadata/tmdb/select', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 disc_id: pendingData.disc_id,
-                index: 'skip',
-                disc_type: pendingData.disc_type
+                index: 'skip'
             })
         });
         

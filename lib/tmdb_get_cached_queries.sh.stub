@@ -1,0 +1,38 @@
+#!/bin/bash
+#
+# TMDB Cached Queries Function
+# TODO: Diese Funktion muss in libtmdb.sh implementiert werden
+#
+# Zweck: Sucht nach *.tmdbquery Dateien, berechnet Timeout und gibt strukturiertes JSON zurück
+#
+# Rückgabe (JSON):
+# {
+#   "pending": true,
+#   "disc_type": "dvd-video" | "bd-video",
+#   "disc_id": "DISC_ID",
+#   "timeout": 45,
+#   "results": [...]
+# }
+#
+# oder
+# {
+#   "pending": false
+# }
+
+tmdb_get_cached_queries() {
+    # TODO: Implementation needed in /opt/disk2iso-tmdb/lib/libtmdb.sh
+    
+    # Logik:
+    # 1. Suche nach *.tmdbquery Dateien in $OUTPUT_DIR/**
+    # 2. Wenn gefunden:
+    #    - Lese Datei-Timestamp (stat)
+    #    - Berechne elapsed time
+    #    - Lese METADATA_SELECTION_TIMEOUT aus Config
+    #    - Berechne timeout_remaining = max(0, timeout - elapsed)
+    #    - Parse JSON-Datei für results + media_type
+    #    - Extrahiere disc_id aus Dateinamen (remove .tmdbquery + _tmdb Suffix)
+    #    - Baue JSON-Response
+    # 3. Wenn nicht gefunden: {"pending": false}
+    
+    echo '{"pending": false}'
+}

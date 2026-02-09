@@ -331,20 +331,20 @@ tmdb_parse_selection() {
     overview=$(echo "$tmdb_json" | jq -r ".[$selected_index].overview // \"\"" 2>/dev/null)
     tmdb_id=$(echo "$tmdb_json" | jq -r ".[$selected_index].id // \"\"" 2>/dev/null)
     
-    # Setze Metadaten via metadb_set() API
-    metadb_set_data "title" "$title"
-    metadb_set_data "year" "$year"
-    metadb_set_data "media_type" "$media_type"
+    # Setze Metadaten via metadata_set_data() API
+    metadata_set_data "title" "$title"
+    metadata_set_data "year" "$year"
+    metadata_set_data "media_type" "$media_type"
     
     if [[ -n "$overview" ]] && [[ "$overview" != "null" ]]; then
-        metadb_set_data "overview" "$overview"
+        metadata_set_data "overview" "$overview"
     fi
     
     # Setze Provider-Informationen
-    metadb_set_metadata "provider" "tmdb"
+    metadata_set_info "provider" "tmdb"
     
     if [[ -n "$tmdb_id" ]] && [[ "$tmdb_id" != "null" ]]; then
-        metadb_set_metadata "provider_id" "$tmdb_id"
+        metadata_set_info "provider_id" "$tmdb_id"
     fi
     
     log_info "TMDB: Metadata ausgewählt: $title ($year)"
@@ -372,7 +372,7 @@ tmdb_apply_selection() {
     
     # Update disc_label via metadb API
     local new_label="${safe_title}_${year}"
-    metadb_set_metadata "disc_label" "$new_label"
+    metadata_set_info "disc_label" "$new_label"
     
     log_info "TMDB: Neues disc_label: $new_label"
 }
