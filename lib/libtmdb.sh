@@ -42,7 +42,7 @@ tmdb_check_dependencies() {
     log_debug "$MSG_DEBUG_TMDB_CHECK_START"
 
     #-- Alle Modul Abhängigkeiten prüfen -------------------------------------
-    check_module_dependencies "$MODULE_NAME_TMDB" || return 1
+    integrity_check_module_dependencies "$MODULE_NAME_TMDB" || return 1
 
     #-- Lade API-Konfiguration aus INI ---------------------------------------
     load_api_config_tmdb || return 1
@@ -90,7 +90,7 @@ get_path_tmdb() {
 #            1. [folders] cache aus INI (spezifisch)
 #            2. [folders] output + /cache (konstruiert)
 #            3. OUTPUT_DIR/cache (global)
-#            Ordner wird von check_module_dependencies() erstellt
+#            Ordner wird von integrity_check_module_dependencies() erstellt
 # ===========================================================================
 get_cachepath_tmdb() {
     files_get_module_folder_path "tmdb" "cache"
@@ -106,7 +106,7 @@ get_cachepath_tmdb() {
 #            1. [folders] covers aus INI (spezifisch)
 #            2. [folders] output + /covers (konstruiert)
 #            3. OUTPUT_DIR/covers (global)
-#            Ordner wird von check_module_dependencies() erstellt
+#            Ordner wird von integrity_check_module_dependencies() erstellt
 # ===========================================================================
 get_coverpath_tmdb() {
     files_get_module_folder_path "tmdb" "covers"
@@ -485,7 +485,7 @@ EOF
 # ============================================================================
 
 # ===========================================================================
-# init_tmdb_provider
+# tmdb_init_provider
 # ---------------------------------------------------------------------------
 # Funktion.: Initialisiere TMDB Provider (wird von libmetadata aufgerufen)
 # .........  Prüft eigene INI ob Provider aktiv sein soll
@@ -494,7 +494,7 @@ EOF
 # Hinweis..: Standardisierte Init-Funktion (Naming-Convention)
 # .........  Wird von metadata_load_registered_providers() aufgerufen
 # ===========================================================================
-init_tmdb_provider() {
+tmdb_init_provider() {
     log_debug "TMDB: Starte Provider-Initialisierung"
     
     #-- Prüfe ob Framework bereit ist ---------------------------------------
